@@ -1,14 +1,14 @@
 # Claude Custom Status Line
 
-A customized Claude Code status line with enhanced features.
+A lightweight, Claude-only status line for Claude Code. Stripped of Codex, Gemini, and z.ai integrations.
 
 ## Features
 
-### 1. Shorter Progress Bar
-- Reduced context progress bar from 10 to 5 characters for a more compact display
+### 1. Compact Progress Bar
+- 5-character progress bar (reduced from 10)
 
 ### 2. Dynamic 7-Day Rate Limit Colors
-Instead of static color thresholds, the 7-day rate limit now uses **daily budget tracking**:
+The 7-day rate limit uses **daily budget tracking** instead of static thresholds:
 
 | Day | Green (on track) | Yellow (half-day over) | Red (over budget) |
 |-----|------------------|------------------------|-------------------|
@@ -21,11 +21,17 @@ Instead of static color thresholds, the 7-day rate limit now uses **daily budget
 | 7   | ≤92.86%          | ≤100%                  | >100%             |
 
 **Logic:**
-- **Green**: Usage ≤ `(day - 0.5) × 14.28%` (under half-day budget for current day)
-- **Yellow**: Usage ≤ `day × 14.28%` (within daily budget)
-- **Red**: Usage > `day × 14.28%` (over budget for current day)
+- **Green**: Usage ≤ `(day - 0.5) × 14.28%` (under budget)
+- **Yellow**: Usage ≤ `day × 14.28%` (at budget)
+- **Red**: Usage > `day × 14.28%` (over budget)
 
-This helps you pace your usage throughout the week instead of using static 50%/80% thresholds.
+### 3. Claude-Only (Lightweight)
+Removed all non-Claude integrations:
+- ~~Codex CLI~~
+- ~~Gemini CLI~~
+- ~~z.ai / ZHIPU~~
+
+**Result:** 1507 lines (down from 2481)
 
 ## Installation
 
@@ -81,14 +87,6 @@ Edit `~/.claude/claude-dashboard.local.json` to customize widgets:
 - `todoProgress` - Todo completion rate
 - `burnRate` - Token consumption per minute
 - `cacheHit` - Cache hit percentage
-
-## Notes
-
-- **Gemini Integration**: If you use Gemini CLI widgets, set environment variables:
-  ```bash
-  export GOOGLE_OAUTH_CLIENT_ID="your-client-id"
-  export GOOGLE_OAUTH_CLIENT_SECRET="your-client-secret"
-  ```
 
 ## Based On
 
