@@ -82,10 +82,10 @@ function getColorFor7dPercent(percent, resetsAt) {
   const daysRemaining = Math.max(0, Math.ceil(msRemaining / (1000 * 60 * 60 * 24)));
   const dayNumber = Math.max(1, 7 - daysRemaining + 1);
   const dailyBudget = 100 / 7;
-  const yellowThreshold = (dayNumber - 0.5) * dailyBudget;
-  const redThreshold = dayNumber * dailyBudget;
-  if (percent <= yellowThreshold) return COLORS.pastelGreen;
-  if (percent <= redThreshold) return COLORS.pastelYellow;
+  const yellowThreshold = Math.floor((dayNumber - 0.5) * dailyBudget);
+  const redThreshold = Math.floor(dayNumber * dailyBudget);
+  if (percent < yellowThreshold) return COLORS.pastelGreen;
+  if (percent < redThreshold) return COLORS.pastelYellow;
   return COLORS.pastelRed;
 }
 function colorize(text, color) {

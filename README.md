@@ -10,20 +10,20 @@ A lightweight, Claude-only status line for Claude Code. Stripped of Codex, Gemin
 ### 2. Dynamic 7-Day Rate Limit Colors
 The 7-day rate limit uses **daily budget tracking** instead of static thresholds:
 
-| Day | Green (on track) | Yellow (half-day over) | Red (over budget) |
-|-----|------------------|------------------------|-------------------|
-| 1   | ≤7.14%           | ≤14.28%                | >14.28%           |
-| 2   | ≤21.42%          | ≤28.57%                | >28.57%           |
-| 3   | ≤35.71%          | ≤42.86%                | >42.86%           |
-| 4   | ≤50.00%          | ≤57.14%                | >57.14%           |
-| 5   | ≤64.29%          | ≤71.43%                | >71.43%           |
-| 6   | ≤78.57%          | ≤85.71%                | >85.71%           |
-| 7   | ≤92.86%          | ≤100%                  | >100%             |
+| Day | Green (on track) | Yellow (warning) | Red (over budget) |
+|-----|------------------|------------------|-------------------|
+| 1   | 0-6%             | 7-13%            | 14%+              |
+| 2   | 0-20%            | 21-27%           | 28%+              |
+| 3   | 0-35%            | 36-42%           | 43%+              |
+| 4   | 0-49%            | 50-56%           | 57%+              |
+| 5   | 0-64%            | 65-71%           | 72%+              |
+| 6   | 0-78%            | 79-85%           | 86%+              |
+| 7   | 0-92%            | 93-99%           | 100%              |
 
-**Logic:**
-- **Green**: Usage ≤ `(day - 0.5) × 14.28%` (under budget)
-- **Yellow**: Usage ≤ `day × 14.28%` (at budget)
-- **Red**: Usage > `day × 14.28%` (over budget)
+**Logic (with floor for stricter thresholds):**
+- **Green**: Usage < `floor((day - 0.5) × 14.28%)` (under budget)
+- **Yellow**: Usage < `floor(day × 14.28%)` (at budget)
+- **Red**: Usage ≥ `floor(day × 14.28%)` (over budget)
 
 ### 3. Claude-Only (Lightweight)
 Removed all non-Claude integrations:
