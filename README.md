@@ -82,9 +82,17 @@ Edit `~/.claude/claude-dashboard.local.json` to customize widgets:
 - `burnRate` - Token consumption per minute
 - `cacheHit` - Cache hit percentage
 
+## Notes
+
+- **Gemini Integration**: If you use Gemini CLI widgets, set environment variables:
+  ```bash
+  export GOOGLE_OAUTH_CLIENT_ID="your-client-id"
+  export GOOGLE_OAUTH_CLIENT_SECRET="your-client-secret"
+  ```
+
 ## Based On
 
-This is a customized fork of the [claude-dashboard](https://github.com/anthropics/claude-code) plugin.
+This is a customized version of the claude-dashboard plugin.
 
 ## License
 
