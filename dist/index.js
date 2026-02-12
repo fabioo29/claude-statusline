@@ -88,6 +88,16 @@ function getColorFor7dPercent(percent, resetsAt) {
   if (percent < redThreshold) return COLORS.pastelYellow;
   return COLORS.pastelRed;
 }
+function get7dBudgetThreshold(resetsAt) {
+  if (!resetsAt) return 100;
+  const resetDate = new Date(resetsAt);
+  const now = new Date();
+  const msRemaining = resetDate.getTime() - now.getTime();
+  const daysRemaining = Math.max(0, Math.ceil(msRemaining / (1000 * 60 * 60 * 24)));
+  const dayNumber = Math.max(1, 7 - daysRemaining + 1);
+  const dailyBudget = 100 / 7;
+  return Math.floor(dayNumber * dailyBudget);
+}
 function colorize(text, color) {
   return `${color}${text}${RESET}`;
 }
@@ -698,7 +708,8 @@ var rateLimit7dWidget = {
     }
     const { translations: t } = ctx;
     const color = getColorFor7dPercent(data.utilization, data.resetsAt);
-    const label = `${t.labels["7d_all"]}: ${colorize(`${data.utilization}%`, color)}`;
+    const budget = get7dBudgetThreshold(data.resetsAt);
+    const label = `${t.labels["7d_all"]}: ${colorize(`${data.utilization}%/${budget}%`, color)}`;
     if (!data.resetsAt) return label;
     return `${label} (${formatTimeRemaining(data.resetsAt, t)})`;
   }
@@ -719,7 +730,8 @@ var rateLimit7dSonnetWidget = {
     }
     const { translations: t } = ctx;
     const color = getColorFor7dPercent(data.utilization, data.resetsAt);
-    const label = `${t.labels["7d_sonnet"]}: ${colorize(`${data.utilization}%`, color)}`;
+    const budget = get7dBudgetThreshold(data.resetsAt);
+    const label = `${t.labels["7d_sonnet"]}: ${colorize(`${data.utilization}%/${budget}%`, color)}`;
     if (!data.resetsAt) return label;
     return `${label} (${formatTimeRemaining(data.resetsAt, t)})`;
   }
