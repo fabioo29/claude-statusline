@@ -1,0 +1,12 @@
+{
+  "language": "auto",
+  "plan": "max",
+  "displayMode": "custom",
+  "lines": [
+    ["accountName", "projectInfo", "model"],
+    ["context", "rateLimit5h", "rateLimit7d"]
+  ],
+  "cache": {
+    "ttlSeconds": 60
+  }
+}
