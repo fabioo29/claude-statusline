@@ -77,12 +77,10 @@ Add the `statusLine` key to `~/.claude/settings.json`:
 {
   "statusLine": {
     "type": "command",
-    "command": "node /home/<user>/.claude/statusline/index.js"
+    "command": "node $HOME/.claude/statusline/index.js"
   }
 }
 ```
-
-Replace `<user>` with your actual username (use `echo $HOME` to check). The path must be absolute.
 
 ### 3. Restart Claude Code
 
