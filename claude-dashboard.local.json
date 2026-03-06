@@ -7,6 +7,6 @@
     ["context", "rateLimit5h", "rateLimit7d"]
   ],
   "cache": {
-    "ttlSeconds": 60
+    "ttlSeconds": 300
   }
 }
